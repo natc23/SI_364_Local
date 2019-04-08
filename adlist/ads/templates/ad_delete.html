@@ -1,0 +1,13 @@
+<meta name="wa4e" content="bf8229696f7a3bb4700cfddef19fa23f">
+
+{% extends "base_bootstrap.html" %}
+{% block content %}
+<h1>Delete Ad</h1>
+
+<p>Are you sure you want to delete the ad: {{ ad }}?</p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Yes, delete.">
+</form>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Trip List</h1>
+  {% if trip_list %}
+  <ul>
+    {% for trip in trip_list %}
+      <li>
+          {{ trip.nickname }} ({{ trip.location }})
+          (<a href="{% url 'trip_update' trip.id %}">Update</a> |
+          <a href="{% url 'trip_delete' trip.id %}">Delete</a>) <br/>
+          {{ trip.comments }})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no trips in the library.</p>
+  {% endif %}
+  <p>
+    {% if location_count > 0 %}
+      <a href="{% url 'trip_create' %}">Add a trip</a>
+    {% else %}
+      Please add a location before you add an trip.
+    {% endif %}
+  </p>
+  <p>
+  <a href="{% url 'location_list' %}">View locations</a> ({{ location_count }}) |
+    <a href="{% url 'location_create' %}">Add a location</a>
+  </p>
+{% endblock %}
