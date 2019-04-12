@@ -1,6 +1,7 @@
 <meta name="wa4e" content="bf8229696f7a3bb4700cfddef19fa23f">
 
-{% extends "base_bootstrap.html" %}
+
+{% extends "base_menu.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
 <p>
@@ -11,4 +12,17 @@
     <input type="submit" value="Cancel" onclick="window.location.href='{% url 'ads' %}';return false;">
   </form>
 </p>
+
+<script>
+$("#upload_form").submit(function() {
+  console.log('Checking file size');
+  if (window.File && window.FileReader && window.FileList && window.Blob) {
+      var file = $('#id_{{ form.upload_field_name }}')[0].files[0];
+      if (file && file.size > {{ form.max_upload_limit }} ) {
+          alert("File " + file.name + " of type " + file.type + " must be < {{ form.max_upload_limit_text }}");
+      return false;
+    }
+  }
+});
+</script>
 {% endblock %}
